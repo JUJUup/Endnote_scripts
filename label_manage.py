@@ -6,11 +6,14 @@ Thx for Bill's sharing!
 '''
 from appscript import *
 import unicodedata
+import string
 
 en = app('Endnote 20')
 
 theListOfRefs = en.retrieve(u'shown', records_in=en.documents[1])
-
+# cite_key_list contain all row cite_key (i.e., without duplicate case's suffix)
+cite_key_list = list()
+alphabet = list(string.ascii_lowercase) # a list contain lowercase letters from 'a' -> 'z'
 for aRef in theListOfRefs:
    # get the unformatted record
    unf_rec = en.unformatted_record(aRef)
@@ -34,6 +37,11 @@ for aRef in theListOfRefs:
 
    # assemble the citation key
    cite_key = author + '_' + year
+   key_freq = cite_key_list.count(cite_key)
+   cite_key_list.append(cite_key) # append only cite_key without suffix 
+   # if dumplcate cite_key, give it a suffix based on freq and alhpabet
+   if key_freq > 0 : 
+      cite_key = cite_key + alphabet[key_freq]
    # this flattens the citation key into ascii
    # cite_key = unicodedata.normalize('NFKD',cite_key).encode('ascii','ignore')
    print(cite_key)

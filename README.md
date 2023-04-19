@@ -9,3 +9,5 @@ This repo cache scripts dealing with endnote20 in MacOS.
 This script now only tested in MacOS.Origin script comes from Bill Seufzer, NASA.
 You can see orig script in https://community.endnote.com/t/scripting-endnote/260221
 Thx for Bill's sharing!
+
+NOTE: this script will only handle the current endnote GROUP you open. If not open any endnote window, an error will raise.
